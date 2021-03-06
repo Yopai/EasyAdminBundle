@@ -84,7 +84,7 @@ final class AssociationConfigurator implements FieldConfiguratorInterface
                 ->generateUrl();
 
             $field->setFormTypeOption('attr.data-ea-autocomplete-endpoint-url', $autocompleteEndpointUrl);
-        } else {
+        } else if ($field->getFormType() instanceof \Symfony\Bridge\Doctrine\Form\Type) {
             $field->setFormTypeOptionIfNotSet('query_builder', static function (EntityRepository $repository) use ($field) {
                 // TODO: should this use `createIndexQueryBuilder` instead, so we get the default ordering etc.?
                 // it would then be identical to the one used in autocomplete action, but it is a bit complex getting it in here
